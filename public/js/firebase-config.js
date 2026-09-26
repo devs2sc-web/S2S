@@ -21,7 +21,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 // LINE LIFF ID (นำ LIFF ID ที่ได้จาก LINE Developers Console มาใส่ที่นี่)
-const LIFF_ID = ""; // e.g. "2001234567-AbCdEfGh"
+const LIFF_ID = "2011755547-cpbovq5S";
 
 // Default System Settings for SEED TO SUCCESS
 const DEFAULT_APPEARANCE = {
