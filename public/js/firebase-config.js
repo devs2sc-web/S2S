@@ -4,12 +4,12 @@
  */
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "seed2success-ab3a4.firebaseapp.com",
-    projectId: "seed2success-ab3a4",
-    storageBucket: "seed2success-ab3a4.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA7BgBagTiLub2YrlUPqkFvHbNJWz5PqNA",
+  authDomain: "seedtosuccess-325a4.firebaseapp.com",
+  projectId: "seedtosuccess-325a4",
+  storageBucket: "seedtosuccess-325a4.firebasestorage.app",
+  messagingSenderId: "989565328714",
+  appId: "1:989565328714:web:15caa0af93497c3ef735b3"
 };
 
 // Initialize Firebase
