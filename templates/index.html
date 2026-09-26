@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="pageTitle">{{ brand_name }} - สมาชิก LINE Official</title>
+    <!-- Google Fonts: Sarabun & Cinzel for Luxury Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- QRCode Generator for Digital Card -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- LINE LIFF SDK -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation / Status Header -->
+        <header class="liff-top-header">
+            <button type="button" class="header-icon-btn" id="btnCloseLiffTop" title="ปิด">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="header-secure-pill">
+                <i data-lucide="shield-check" class="shield-icon"></i>
+                <span>LINE Official Verification</span>
+            </div>
+            <div style="width: 32px;"></div>
+        </header>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p id="loadingText">กำลังเชื่อมต่อ LINE...</p>
+        </div>
+
+        <!-- LINE User Banner (Displays when user is logged in via LINE) -->
+        <div id="lineUserBadge" class="line-user-badge hidden">
+            <img id="userAvatar" src="https://placehold.co/80x80/e5e7eb/6b7280?text=LINE" alt="LINE Avatar" class="user-avatar">
+            <div class="user-details">
+                <span class="user-status-tag"><i data-lucide="check" class="check-icon"></i> เชื่อมต่อ LINE สำเร็จ</span>
+                <span id="userDisplayName" class="user-display-name">ผู้ใช้ LINE</span>
+            </div>
+        </div>
+
+        <!-- Main Registration Screen -->
+        <main id="registrationScreen" class="screen-content">
+            <!-- Brand Logo / Name -->
+            <div class="brand-hero">
+                <div id="brandLogoContainer">
+                    <h1 class="brand-title" id="displayBrandName">{{ brand_name }}</h1>
+                </div>
+                <h2 class="brand-invitation" id="displayBrandTitle">{{ brand_title }}</h2>
+                <p class="brand-subtext" id="displayBrandSubtitle">{{ brand_subtitle }}</p>
+            </div>
+
+            <!-- Notice / Policy Text (Matches the reference image) -->
+            <div class="terms-notice-box">
+                <p id="displayNoticeText">
+                    LINE Official Account เปิดบริการสอบถามข้อมูลพร้อมลงทะเบียน ซึ่งบริการทั้งหมดนี้ดำเนินการโดยตรงจากทางเรา ในระหว่างการตรวจสอบจะทำการยืนยันตัวตนของท่านตามชื่อ เบอร์โทรศัพท์ อีเมล และบัญชี LINE ที่ท่านระบุ หลังจากการลงทะเบียนสำเร็จแล้ว หากท่านเปลี่ยนเบอร์โทรศัพท์หรือติดตั้งแอปพลิเคชัน LINE ใหม่ในอนาคต ท่านต้องเข้าสู่ระบบอีกครั้งด้วย LINE ID เดิมเพื่อใช้งานต่อไป
+                </p>
+            </div>
+
+            <!-- Registration Form (Fields injected dynamically from Admin settings) -->
+            <form id="signupForm" class="signup-form" novalidate>
+                <input type="hidden" id="lineUserId" name="line_user_id" value="">
+                <input type="hidden" id="lineDisplayName" name="line_display_name" value="">
+                <input type="hidden" id="linePictureUrl" name="line_picture_url" value="">
+
+                <!-- Dynamic Container for Form Fields -->
+                <div id="dynamicFormFields" class="fields-container">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+
+                <!-- Error Banner -->
+                <div id="formErrorBanner" class="form-error-banner hidden"></div>
+
+                <!-- Submit Button -->
+                <div class="submit-action-area">
+                    <button type="submit" id="btnSubmit" class="btn-primary-luxury">
+                        <span id="btnSubmitText">ยืนยันการลงทะเบียน</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </button>
+                </div>
+            </form>
+
+            <footer class="page-footer">
+                <p>© <span id="footerBrandName">{{ brand_name }}</span>. All Rights Reserved.</p>
+                <div class="dev-mode-pill" id="devModeNotice">
+                    <small>โหมดทดสอบ: สามารถกรอกข้อมูลและทดสอบได้ทันที</small>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Digital Member Card Screen (Shown if already registered or after successful signup) -->
+        <div id="memberCardScreen" class="screen-content hidden">
+            <div class="card-screen-header">
+                <div class="success-icon-wrap">
+                    <i data-lucide="check" class="success-icon"></i>
+                </div>
+                <h2 class="card-screen-title">ลงทะเบียนสมาชิกสำเร็จ</h2>
+                <p class="card-screen-sub" id="cardWelcomeMsg">ยินดีต้อนรับสู่สมาชิกคนสำคัญ</p>
+            </div>
+
+            <!-- The Luxury Digital Card -->
+            <div class="luxury-member-card" id="digitalMemberCard">
+                <div class="card-top">
+                    <span class="card-brand" id="cardBrandName">{{ brand_name }}</span>
+                    <span class="card-tier-badge" id="cardTierBadge">VIP MEMBER</span>
+                </div>
+                <div class="card-chip-row">
+                    <div class="card-chip"></div>
+                    <i data-lucide="wifi" class="card-contactless"></i>
+                </div>
+                <div class="card-mid">
+                    <div class="card-member-code" id="cardMemberCode">MBR-2026-00001</div>
+                    <div class="card-member-name" id="cardMemberName">คุณ สมชาย ใจดี</div>
+                </div>
+                <div class="card-bottom">
+                    <div class="card-detail-item">
+                        <span class="card-lbl">เบอร์โทรศัพท์</span>
+                        <span class="card-val" id="cardMemberPhone">081-234-5678</span>
+                    </div>
+                    <div class="card-detail-item right">
+                        <span class="card-lbl">วันที่สมัคร</span>
+                        <span class="card-val" id="cardRegisterDate">2026-09-25</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member QR Code for Scanning -->
+            <div class="card-qr-box">
+                <div id="memberQrCode"></div>
+                <p class="qr-hint">แสดง Digital Pass / QR Code นี้แก่เจ้าหน้าที่เพื่อยืนยันตัวตนเข้างานสัมมนา</p>
+            </div>
+
+            <div class="card-actions">
+                <a href="/portal" class="btn-primary-luxury" style="background:#1e3a8a; text-decoration:none; margin-bottom:10px;">
+                    <i data-lucide="book-open" class="btn-icon"></i>
+                    <span>เข้าสู่คลังสื่อการเรียนรู้ออนไลน์ (Part 2)</span>
+                </a>
+                <button type="button" class="btn-primary-luxury" id="btnCloseLiff">
+                    <i data-lucide="x-circle" class="btn-icon"></i>
+                    <span>ปิดหน้าต่างนี้และกลับสู่ LINE</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Modal -->
+        <div id="privacyModal" class="modal-overlay hidden">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h3>นโยบายความเป็นส่วนตัว (PDPA)</h3>
+                    <button type="button" class="modal-close" id="btnClosePrivacy">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>1. การเก็บรวบรวมข้อมูลส่วนบุคคล:</strong> เพื่อใช้ในการระบุตัวตน ยืนยันสิทธิ์ความเป็นสมาชิก และติดต่อสื่อสารข้อมูลข่าวสาร สิทธิประโยชน์พิเศษเฉพาะบุคคล</p>
+                    <p><strong>2. ความปลอดภัยของข้อมูล:</strong> ข้อมูลของท่านจะถูกเก็บรักษาอย่างปลอดภัยตามมาตรฐานความปลอดภัยทางอิเล็กทรอนิกส์</p>
+                    <p><strong>3. สิทธิของเจ้าของข้อมูล:</strong> ท่านสามารถขอตรวจสอบ แก้ไข หรือขอลบข้อมูลส่วนตัวของท่านได้โดยติดต่อผ่านช่องทาง LINE Official Account</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-primary-luxury" id="btnAcceptPrivacy">รับทราบ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Configuration from Flask -->
+    <script>
+        window.APP_CONFIG = {
+            liffId: "{{ liff_id }}",
+            brandName: "{{ brand_name }}"
+        };
+    </script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

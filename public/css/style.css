@@ -1,0 +1,740 @@
+/* ===================================================
+   Luxury Brand Membership - Style Sheet (Gucci Inspired)
+   =================================================== */
+
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --text-muted: #888888;
+    --input-bg: #f5f5f5;
+    --input-border: #e2e2e2;
+    --input-focus: #000000;
+    --card-bg: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #111111 100%);
+    --card-accent: #d4af37; /* Luxury Gold */
+    --accent-color: #000000;
+    --error-color: #dc2626;
+    --line-green: #06c755;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* ==================== Top LIFF Header ==================== */
+.liff-top-header {
+    height: 48px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.header-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.header-icon-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.header-secure-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #666;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.shield-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--line-green);
+}
+
+/* ==================== LINE User Badge ==================== */
+.line-user-badge {
+    margin: 12px 20px 0;
+    padding: 10px 14px;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-status-tag {
+    font-size: 11px;
+    color: #166534;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.check-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.user-display-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* ==================== Screen Content ==================== */
+.screen-content {
+    padding: 24px 24px 40px;
+    flex: 1;
+}
+
+.brand-hero {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    letter-spacing: 6px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.brand-invitation {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #222222;
+    padding: 0 10px;
+    margin-bottom: 6px;
+}
+
+.brand-subtext {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 0 10px;
+}
+
+/* ==================== Terms Notice Box ==================== */
+.terms-notice-box {
+    background-color: #ffffff;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.terms-notice-box p {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+/* ==================== Form Elements ==================== */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #222222;
+}
+
+.required {
+    color: var(--error-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    background-color: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    background-color: #ffffff;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 1px #000000;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px 36px 12px 14px;
+    background-color: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--text-primary);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-select:focus {
+    background-color: #ffffff;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 1px #000000;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #666;
+    pointer-events: none;
+}
+
+/* Birthday 3-Column Grid */
+.birthday-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.2fr;
+    gap: 8px;
+}
+
+/* Mobile Phone Input */
+.phone-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.phone-prefix-badge {
+    background-color: #e5e5e5;
+    padding: 12px 16px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: #222;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.phone-field {
+    flex: 1;
+    letter-spacing: 1px;
+}
+
+.input-hint {
+    font-size: 11.5px;
+    color: var(--text-muted);
+}
+
+.error-msg {
+    font-size: 12px;
+    color: var(--error-color);
+    display: none;
+}
+
+.error-msg.visible {
+    display: block;
+}
+
+/* PDPA Consent Checkbox */
+.consent-group {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 3px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.consent-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.consent-text a {
+    color: #000000;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* Buttons */
+.submit-action-area {
+    margin-top: 10px;
+}
+
+.btn-primary-luxury {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary-luxury:hover {
+    background-color: #222222;
+    transform: translateY(-1px);
+}
+
+.btn-primary-luxury:active {
+    transform: translateY(0);
+}
+
+.btn-primary-luxury:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.form-error-banner {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: var(--error-color);
+    padding: 12px 14px;
+    border-radius: var(--border-radius-sm);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Footer */
+.page-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.dev-mode-pill {
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #f3f4f6;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+/* ==================== Digital Member Card ==================== */
+.card-screen-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.success-icon-wrap {
+    width: 56px;
+    height: 56px;
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    box-shadow: 0 0 0 6px #dcfce7;
+}
+
+.success-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.card-screen-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 4px;
+}
+
+.card-screen-sub {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+
+.luxury-member-card {
+    background: var(--card-bg);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.luxury-member-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-brand {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.card-tier-badge {
+    background: linear-gradient(135deg, #d4af37, #f3e5ab);
+    color: #111;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.card-chip-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, #e0be6c, #aa8936);
+    border-radius: 5px;
+    border: 1px solid #7c6220;
+}
+
+.card-contactless {
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    transform: rotate(90deg);
+}
+
+.card-mid {
+    margin-bottom: 20px;
+}
+
+.card-member-code {
+    font-family: monospace;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.card-member-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 12px;
+}
+
+.card-detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-detail-item.right {
+    text-align: right;
+}
+
+.card-lbl {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-val {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.card-qr-box {
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius-lg);
+    padding: 24px 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+#memberQrCode {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+#memberQrCode img {
+    border-radius: 8px;
+}
+
+.qr-hint {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+}
+
+/* ==================== Modal Overlay ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal-box {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+/* ==================== Loading Spinner ==================== */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 80;
+    gap: 14px;
+    transition: opacity 0.3s ease;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e5e5e5;
+    border-top: 3px solid #000000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}

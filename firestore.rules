@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ========================================================
+    // 1. Members Collection (ผู้ลงทะเบียนสัมมนา & ขอสิทธิ์ Part 2)
+    // ป้องกันข้อมูลรั่วไหล: คนทั่วไปไม่สามารถ list/ดูรายชื่อคนอื่นได้
+    // ========================================================
+    match /members/{memberId} {
+      // อนุญาตให้สร้าง (ลงทะเบียน) ได้ทุกคน แต่ต้องมีข้อมูลจำเป็น
+      allow create: if request.resource.data.first_name is string &&
+                       request.resource.data.last_name is string &&
+                       request.resource.data.phone is string &&
+                       request.resource.data.email is string;
+
+      // อ่านข้อมูลรายบุคคล (สำหรับตรวจสอบสถานะตอนล็อกอิน)
+      // หรือ Admin ที่ล็อกอินแล้วสามารถอ่านได้ทั้งหมด
+      allow get: if true;
+      allow list: if request.auth != null;
+
+      // เฉพาะ Admin เท่านั้นที่สามารถกดอนุมัติสิทธิ์ (Update) หรือลบข้อมูล (Delete) ได้
+      allow update, delete: if request.auth != null;
+    }
+
+    // ========================================================
+    // 2. Settings Collection (หน้าตา & แบบฟอร์ม)
+    // ========================================================
+    match /settings/{settingId} {
+      // สาธารณะอ่านได้ เพื่อนำไปเรนเดอร์หน้าเว็บ
+      allow read: if true;
+      // เฉพาะ Admin เท่านั้นที่แก้ไขได้
+      allow write: if request.auth != null;
+    }
+
+    // ========================================================
+    // 3. Learning Materials (คลังสื่อการเรียนรู้ Part 2)
+    // ========================================================
+    match /learning_materials/{materialId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ========================================================
+    // 4. Audit Logs (ประวัติความปลอดภัย PDPA)
+    // ========================================================
+    match /audit_logs/{logId} {
+      allow create: if true;
+      allow read, write: if request.auth != null;
+    }
+  }
+}

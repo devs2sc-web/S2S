@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand_name }} - คลังสื่อการเรียนรู้ออนไลน์ (Part 2)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- LINE LIFF SDK -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <link rel="stylesheet" href="/static/css/portal.css">
+</head>
+<body>
+    <div class="portal-app">
+        <!-- Top Navigation Bar -->
+        <header class="portal-header">
+            <div class="portal-container header-inner">
+                <div class="brand-group">
+                    <span class="tu-badge">THAMMASAT UNIVERSITY</span>
+                    <a href="/portal" class="portal-logo">{{ brand_name }}</a>
+                    <span class="portal-tag">ONLINE LEARNING</span>
+                </div>
+                <div class="user-action-group" id="userHeaderArea">
+                    <a href="/" class="btn-link-sm">
+                        <i data-lucide="ticket" class="icon-sm"></i>
+                        <span>หน้าลงทะเบียนสัมมนา</span>
+                    </a>
+                    <!-- Logged in info injected by JS -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="portal-loading hidden">
+            <div class="spinner"></div>
+            <p id="loadingMsg">กำลังตรวจสอบสิทธิ์...</p>
+        </div>
+
+        <main class="portal-container main-content">
+            <!-- ==================== STATE 1: LOGIN CARD ==================== -->
+            <section id="loginSection" class="portal-section">
+                <div class="login-card-container">
+                    <div class="portal-login-card">
+                        <div class="login-hero">
+                            <span class="hero-sub">โครงการ SEED TO SUCCESS เมล็ดพันธุ์สู่ความสำเร็จ</span>
+                            <h1 class="hero-title">เข้าสู่ระบบคลังสื่อการเรียนรู้ออนไลน์ (Part 2)</h1>
+                            <p class="hero-desc">สำหรับผู้เข้าร่วมโครงการที่ลงทะเบียนในงานสัมมนา และได้รับอนุมัติสิทธิ์เข้าถึงสื่อการเรียนรู้</p>
+                        </div>
+
+                        <!-- LINE Login Button (Fast for Mobile/LIFF) -->
+                        <div class="liff-login-block" id="liffLoginBlock">
+                            <button type="button" class="btn-line-login" id="btnLineLogin">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" style="margin-right:8px;">
+                                    <path d="M12 2C6.48 2 2 5.92 2 10.75c0 4.29 3.55 7.89 8.35 8.57.36.08.85.24.98.54.11.28.07.72.04 1-.05.44-.24 1.76-.27 2.02-.04.38.16.59.48.42.34-.18 4.67-2.76 6.38-4.73C21.17 17.21 22 14.15 22 10.75 22 5.92 17.52 2 12 2z"/>
+                                </svg>
+                                <span>เข้าสู่ระบบอัตโนมัติด้วย LINE</span>
+                            </button>
+                            <div class="login-divider">
+                                <span>หรือเข้าสู่ระบบด้วยอีเมล / เบอร์โทร</span>
+                            </div>
+                        </div>
+
+                        <!-- Email / Phone Login Form (Ideal for Desktop) -->
+                        <form id="emailLoginForm" class="portal-form">
+                            <div class="form-group">
+                                <label for="loginIdentifier">อีเมล หรือ เบอร์โทรศัพท์ ที่ลงทะเบียนไว้</label>
+                                <input type="text" id="loginIdentifier" class="form-input" placeholder="example@email.com หรือ 0812345678" required autocomplete="username">
+                                <span class="input-hint">กรอกอีเมลหรือเบอร์มือถือที่คุณใช้ลงทะเบียนในงานสัมมนา</span>
+                            </div>
+
+                            <div id="loginError" class="login-error-msg hidden"></div>
+
+                            <button type="submit" class="btn-primary-portal" id="btnLoginSubmit">
+                                <span>เข้าสู่ระบบการเรียนรู้</span>
+                                <i data-lucide="arrow-right" class="icon-sm"></i>
+                            </button>
+                        </form>
+
+                        <div class="login-footer">
+                            <span>ยังไม่ได้ลงทะเบียนเข้าร่วมโครงการ?</span>
+                            <a href="/" class="link-register">ลงทะเบียนร่วมงานสัมมนาที่นี่</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== STATE 2: PENDING APPROVAL ==================== -->
+            <section id="pendingSection" class="portal-section hidden">
+                <div class="status-card-box">
+                    <div class="status-icon-wrap icon-amber">
+                        <i data-lucide="clock" class="status-icon"></i>
+                    </div>
+                    <span class="status-pill pill-amber">สถานะ: รอการอนุมัติสิทธิ์ (Pending Review)</span>
+                    <h2 class="status-card-title">ใบสมัครของคุณอยู่ระหว่างการพิจารณาตรวจสอบสิทธิ์</h2>
+                    <p class="status-card-desc">
+                        คุณ <strong id="pendingMemberName">-</strong> ได้ลงทะเบียนเข้าร่วมโครงการ SEED TO SUCCESS เรียบร้อยแล้ว<br>
+                        ขณะนี้ทีมงานโครงการกำลังดำเนินการตรวจสอบและเปิดสิทธิ์เข้าถึงคลังสื่อการเรียนรู้ออนไลน์ให้แก่ท่าน
+                    </p>
+                    <div class="pending-info-box">
+                        <div class="info-row">
+                            <span class="info-lbl">รหัสสมาชิก:</span>
+                            <span class="info-val" id="pendingMemberCode">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-lbl">อีเมล:</span>
+                            <span class="info-val" id="pendingMemberEmail">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-lbl">วันที่ลงทะเบียน:</span>
+                            <span class="info-val" id="pendingRegisterDate">-</span>
+                        </div>
+                    </div>
+                    <p class="pending-tip">
+                        💡 <strong>คำแนะนำ:</strong> เมื่อแอดมินอนุมัติสิทธิ์แล้ว ท่านจะสามารถเข้าสู่ระบบและเริ่มเรียนรู้ได้ทันที หรือรอการแจ้งเตือนผ่าน LINE Official Account
+                    </p>
+                    <div class="status-actions">
+                        <button type="button" class="btn-secondary-portal" id="btnRefreshStatus">
+                            <i data-lucide="rotate-cw" class="icon-sm"></i>
+                            <span>ตรวจสอบสถานะอีกครั้ง</span>
+                        </button>
+                        <a href="/" class="btn-link-portal">กลับสู่หน้าบัตรสมาชิก</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== STATE 3: LEARNING DASHBOARD (APPROVED) ==================== -->
+            <section id="learningSection" class="portal-section hidden">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <span class="welcome-tag">SEED TO SUCCESS MEMBER • PART 2</span>
+                        <h1 class="welcome-title">ยินดีต้อนรับคุณ <span id="welcomeUserName">-</span></h1>
+                        <p class="welcome-sub">เข้าสู่คลังสื่อการเรียนรู้และกิจกรรมพิเศษเพื่อพัฒนาเมล็ดพันธุ์สู่ความสำเร็จ</p>
+                    </div>
+                    <div class="member-chip-card">
+                        <div class="chip-label">สถานะการเรียนรู้</div>
+                        <div class="chip-status"><i data-lucide="check-circle" class="icon-sm"></i> ได้รับอนุมัติสิทธิ์แล้ว</div>
+                        <div class="chip-code" id="dashMemberCode">SEED-2026-00001</div>
+                    </div>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="filter-bar">
+                    <button type="button" class="filter-btn active" data-cat="all">ทั้งหมด</button>
+                    <button type="button" class="filter-btn" data-cat="วิดีโอบรรยาย">วิดีโอบรรยาย</button>
+                    <button type="button" class="filter-btn" data-cat="เอกสารดาวน์โหลด">เอกสารประกอบ</button>
+                    <button type="button" class="filter-btn" data-cat="กิจกรรม Workshop">กิจกรรม & Workshop</button>
+                </div>
+
+                <!-- Learning Materials Grid -->
+                <div class="materials-grid" id="materialsGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Video Player Modal -->
+        <div id="videoModal" class="modal-overlay hidden">
+            <div class="video-modal-box">
+                <div class="video-modal-header">
+                    <h3 id="videoModalTitle">วิดีโอการเรียนรู้</h3>
+                    <button type="button" class="modal-close" id="btnCloseVideo">&times;</button>
+                </div>
+                <div class="video-container" id="videoContainer">
+                    <!-- Embed iframe -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="portal-footer">
+            <p>© โครงการ SEED TO SUCCESS มหาวิทยาลัยธรรมศาสตร์. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        window.APP_CONFIG = {
+            liffId: "{{ liff_id }}",
+            brandName: "{{ brand_name }}"
+        };
+    </script>
+    <script src="/static/js/portal.js"></script>
+</body>
+</html>
